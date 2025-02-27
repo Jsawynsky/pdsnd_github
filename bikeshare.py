@@ -122,8 +122,8 @@ def trip_duration_stats(df):
     """
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
-    total_duration = df['Trip Duration'].sum()
-    minute, second = divmod(total_duration,60)
+    trip_duration = df['Trip Duration'].sum()
+    minute, second = divmod(trip_duration,60)
     hour, minute = divmod(minute, 60)
     #Finds the average duration
     average_duration = round(df['Trip Duration'].mean())
@@ -176,7 +176,7 @@ def display_data(df):
     Displays 5 rows of data per user request
     """
     start_index = 0
-    chunk_size = 5
+    row_size = 5
     acceptable_responses = ['yes', 'no']
     user_input = ''
 
@@ -186,10 +186,10 @@ def display_data(df):
             print ('\nPlease respond with yes or no')
     
     while user_input == 'yes':
-        chunk = df.iloc[start_index:start_index + chunk_size]
+        chunk = df.iloc[start_index:start_index + row_size]
         print(chunk)          
 
-        start_index += chunk_size
+        start_index += row_size
         if start_index < len(df):
             user_input = input('Do you want to see the next 5 items? (yes/no): ').strip().lower()
             while user_input not in acceptable_responses:
